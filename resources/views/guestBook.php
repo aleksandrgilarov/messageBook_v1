@@ -42,7 +42,7 @@
       </div>
     </nav>
 
-    <div class="test">Test</div>
+    
 
 	<!-- MAIN CONTENT AND INJECTED VIEWS -->
     <div id="main">
@@ -51,15 +51,15 @@
     </div>
 
 	<!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
-	<script src="<?= asset('js/angular/angular.min.js') ?>"></script>
-	<script src="<?= asset('js/angular/angular-route.min.js') ?>"></script>
-	<script src="<?= asset('js/jquery.min.js') ?>"></script>
-	<script src="<?= asset('js/bootstrap.min.js') ?>"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/angular-route.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	
 	<!-- AngularJS Application Scripts -->
-	<script src="<?= asset('app/app.module.js') ?>"></script>
-	<script src="<?= asset('app/messages/messages.controller.js') ?>"></script>
-	<script src="<?= asset('app/hamburger/hamburger.controller.js') ?>"></script>
+	<script src="app/app.module.js"></script>
+	<script src="app/messages/messages.controller.js"></script>
+	
 
   <script type="text/javascript">
     
