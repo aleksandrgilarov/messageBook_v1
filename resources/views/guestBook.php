@@ -41,6 +41,8 @@
       </div>
     </nav>
 
+    <div class="test">Test</div>
+
 	<!-- MAIN CONTENT AND INJECTED VIEWS -->
     <div id="main">
         <!-- this is where content will be injected -->
