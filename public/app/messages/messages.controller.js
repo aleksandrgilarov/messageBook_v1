@@ -2,8 +2,12 @@
     GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants) {
 		// set our current page for pagination purposes
 		 $scope.currentPage=1;
-		 $scope.lastPage=1;
-		 $scope.loadMoreText='Показать больше сообщений...';
+		 $scope.prev_page_url=null;
+		 $scope.next_page_url=null;
+		 $scope.lastPage=null;
+		 $scope.pages = [];
+
+		 
 		
 		//retrieve messages listing from API
 		$http.get(constants.API_URL + "messages", {params: { page: $scope.currentPage }})
@@ -11,31 +15,15 @@
 				$scope.messages = response.data;
 				$scope.currentPage = response.current_page;
 				$scope.lastPage = response.last_page;
-				
-				if($scope.currentPage >= $scope.lastPage){
-					$scope.loadMoreText='Все сообщения отображены!';
+				$scope.prev_page_url= response.prev_page_url;
+				$scope.next_page_url= response.next_page_url;
+				console.log($scope);
+				for (var i =0; i < $scope.lastPage; i++) {
+					$scope.pages[i] = i+1;
 				}
 			});
 		
-		// infinite scroll of the messages
-		$scope.loadMoreMessages = function() {
-			// increase our current page index
-			$scope.currentPage++;
-			
-			
-			//retrieve messages listing from API and append them to our current list
-			$http.get(constants.API_URL + "messages", {params: { page: $scope.currentPage }})
-				.success(function(response) {
-					$scope.messages = $scope.messages.concat(response.data);
-					$scope.currentPage = response.current_page;
-					$scope.lastPage = response.last_page;
-					
-					if($scope.currentPage >= $scope.lastPage){
-						$scope.loadMoreText='Все сообщения отображены!';
-					}
-				});
-				
-		};
+		
 
 		$scope.propertyName = 'name';
   		$scope.reverse = true;
@@ -78,23 +66,29 @@ $scope.addMessage = function() {
 				.success(function(response) {
 					var string1 = $scope.mainCaptcha;
     				var string2 = $scope.c;
-					console.log(response);
+					//console.log(response);
 				    if (string1 == string2) {
         			$scope.closeModal();
-					//reload the page
-					location.reload();
+					//retrieve messages listing from API
+		$http.get(constants.API_URL + "messages", {params: { page: $scope.currentPage }})
+			.success(function(response) {
+				$scope.messages = response.data;
+				$scope.currentPage = response.current_page;
+				$scope.lastPage = response.last_page;
+				$scope.prev_page_url= response.prev_page_url;
+				$scope.next_page_url= response.next_page_url;
+				console.log($scope);
+				for (var i =0; i < $scope.lastPage; i++) {
+					$scope.pages[i] = i+1;
+				}
+			});
+			$scope.message = {};
     }
+
     else {
         alert(false);
     }
 					
-					// close the modal
-					//$scope.closeModal();
-					//reload the page
-					//location.reload();
-					
-					
-
 				})
 				.error(function(response, status, headers, config) {
 					// alert and log the response
@@ -110,10 +104,46 @@ $scope.addMessage = function() {
 		// display the modal form
 		$scope.showModal = function() {
 			$('#addMessageModal').modal('show');
+
+
 		}
 		
 		// close the modal form
 		$scope.closeModal = function() {
 			$('#addMessageModal').modal('hide');
 		}
+
+		$scope.getPaginationData = function(page_url) {
+	    var url = page_url;
+	    if (url!=null) {
+	    $http.get(url)
+			.success(function(response) {
+				$scope.messages = response.data;
+				$scope.currentPage = response.current_page;
+				$scope.lastPage = response.last_page;
+				$scope.prev_page_url= response.prev_page_url;
+				$scope.next_page_url= response.next_page_url;
+				console.log($scope);
+				for (var i =0; i < $scope.lastPage; i++) {
+					$scope.pages[i] = i+1;
+				}
+			});}
+	}
+
+	$scope.getPaginationData2 = function(page) {
+	    var url = constants.API_URL + "messages?page="+page;
+	    if (url!=null) {
+	    $http.get(url)
+			.success(function(response) {
+				$scope.messages = response.data;
+				$scope.currentPage = response.current_page;
+				$scope.lastPage = response.last_page;
+				$scope.prev_page_url= response.prev_page_url;
+				$scope.next_page_url= response.next_page_url;
+				console.log($scope);
+				for (var i =0; i < $scope.lastPage; i++) {
+					$scope.pages[i] = i+1;
+				}
+			});}
+	}
 	});

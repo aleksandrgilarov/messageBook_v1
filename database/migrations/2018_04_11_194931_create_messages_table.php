@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->string('link');
+            $table->string('link')->nullable();;
             $table->text('text');
             $table->string('ip')->nullable();
             $table->string('browser_info')->nullable();

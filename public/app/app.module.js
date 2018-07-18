@@ -4,7 +4,7 @@ var GuestBook = angular.module('GuestBook', ['ngRoute']);
 
  // define our canstant for the API
 GuestBook.constant('constants', {
-		API_URL: 'https://message-book.herokuapp.com/api/'
+		API_URL: 'http://127.0.0.1:8000/api/'
 	});
 	
 // configure our routes
