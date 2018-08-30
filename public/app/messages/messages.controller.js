@@ -8,18 +8,20 @@
 		 $scope.pages = [];
 		
 		//retrieve messages listing from API
-		$http.get(constants.API_URL + "messages", {params: { page: $scope.currentPage }})
-			.success(function(response) {
-				$scope.messages = response.data;
-				$scope.currentPage = response.current_page;
-				$scope.lastPage = response.last_page;
-				$scope.prev_page_url= response.prev_page_url;
-				$scope.next_page_url= response.next_page_url;
-				console.log($scope);
-				for (var i =0; i < $scope.lastPage; i++) {
-					$scope.pages[i] = i+1;
-				}
-			});
+		$scope.getMessages = function() {
+            $http.get(constants.API_URL + "messages", {params: {page: $scope.currentPage}})
+                .success(function (response) {
+                    $scope.messages = response.data;
+                    $scope.currentPage = response.current_page;
+                    $scope.lastPage = response.last_page;
+                    $scope.prev_page_url = response.prev_page_url;
+                    $scope.next_page_url = response.next_page_url;
+                    //console.log($scope);
+                    for (var i = 0; i < $scope.lastPage; i++) {
+                        $scope.pages[i] = i + 1;
+                    }
+                });
+        };
 
 		$scope.propertyName = 'created_at';
   		$scope.reverse = true;
@@ -61,18 +63,7 @@ $scope.addMessage = function() {
             .success(function () {
                 $scope.closeModal();
                 //retrieve messages listing from API
-                $http.get(constants.API_URL + "messages", {params: {page: $scope.currentPage}})
-                    .success(function (response) {
-                        $scope.messages = response.data;
-                        $scope.currentPage = response.current_page;
-                        $scope.lastPage = response.last_page;
-                        $scope.prev_page_url = response.prev_page_url;
-                        $scope.next_page_url = response.next_page_url;
-                        console.log($scope);
-                        for (var i = 0; i < $scope.lastPage; i++) {
-                            $scope.pages[i] = i + 1;
-                        }
-                    });
+                $scope.getMessages();
                 $scope.message = {};
             })
 
@@ -116,7 +107,7 @@ $scope.addMessage = function() {
 				$scope.lastPage = response.last_page;
 				$scope.prev_page_url= response.prev_page_url;
 				$scope.next_page_url= response.next_page_url;
-				console.log($scope);
+				//console.log($scope);
 				for (var i =0; i < $scope.lastPage; i++) {
 					$scope.pages[i] = i+1;
 				}
@@ -133,7 +124,7 @@ $scope.addMessage = function() {
 				$scope.lastPage = response.last_page;
 				$scope.prev_page_url= response.prev_page_url;
 				$scope.next_page_url= response.next_page_url;
-				console.log($scope);
+				//console.log($scope);
 				for (var i =0; i < $scope.lastPage; i++) {
 					$scope.pages[i] = i+1;
 				}
