@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 
 
 
-Route::resource('messages','MessageController',['only'=>['index','store','show','update']]);
+Route::resource('messages','MessageController',['only'=>['index','store']]);
 

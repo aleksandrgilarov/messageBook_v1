@@ -14,13 +14,12 @@
         <div class="col-md-12">
           <div class="container">
 			<div class="row" >
-				<div class="text-right"><button type="submit" class="btn btn-success btn-lg" ng-click="showModal()">Добавить новое сообщение <i class="glyphicon glyphicon-plus"></i></button></div>
-				<div class="col-md-12">
+				<div class="col-md-8">
 					<h1>Сообщения</h1>
-					<p>Ниже все сообщения оставленные пользователями.</p>
-					
-					
 				</div>
+				<div class="col-md-4 text-right"><button type="submit" class="btn btn-success btn-lg" style="margin-top: 20px" ng-click="showModal()">Добавить новое сообщение <i class="glyphicon glyphicon-plus"></i></button></div>
+			</div>
+			  <div class="row text-center"><h3>Ниже все сообщения оставленные пользователями.</h3></div>
 				<div class="col-md-12">
 					<table class="table table-list-search table-striped" id="myTable">
 						<thead>
@@ -35,7 +34,6 @@
 								<th>
 		<button ng-click="sortBy('created_at')">Дата добавления</button>
         <span class="sortorder" ng-show="propertyName === 'created_at'" ng-class="{reverse: reverse}"></span></th></th>
-								
 							</tr>
 						</thead>
 						<tbody >
@@ -52,31 +50,24 @@
 					</table> 
 					<!-- End of Table-to-load-the-data Part -->					
 				</div>
-				
-				
-
 
 				<!--Pagination-->
-	 <ul class="pagination justify-content-center" >			
-<li class="page-item" ng-class="{disabled: prev_page_url==null}">
-				      <a class="page-link" ng-click="getPaginationData(prev_page_url)"><<</a>
-				    </li>
-				 
-				    <li ng-repeat= "page in pages" ng-class="{disabled: currentPage==page}">
-				   
-				   		<a class="page-link" ng-click="getPaginationData2(page)">{{page}}</a>
-					
-				   </li>
-				 
-				 <li class="page-item" ng-class="{disabled: next_page_url==null}">
-				      <a class="page-link" ng-click="getPaginationData(next_page_url)">>></a>
-				    </li>
-				 </ul>
-
-
+			  <div class="row text-center">
+			 			<ul class="pagination" >
+						<li class="page-item" ng-class="{disabled: prev_page_url==null}">
+							  <a style="cursor: pointer" class="page-link" ng-click="getPaginationData(prev_page_url)"><<</a>
+						</li>
+							<li ng-repeat= "page in pages" ng-class="{disabled, active: currentPage==page}">
+								<a style="cursor: pointer" class="page-link" ng-click="getPaginationData2(page)">{{page}}</a>
+						   </li>
+						 <li class="page-item" ng-class="{disabled: next_page_url==null}">
+							  <a style="cursor: pointer" class="page-link" ng-click="getPaginationData(next_page_url)">>></a>
+							</li>
+						 </ul>
+			  </div>
 
 				<!-- Modal-->
-				<div class="modal fade" id="addMessageModal" tabindex="-1" role="dialog" aria-labelledby="addBurgerModalLabel" aria-hidden="true">
+				<div class="modal fade" id="addMessageModal" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -87,7 +78,7 @@
 								<form name="frmAddMessage" class="form-horizontal" novalidate="">
 
 									<div class="form-group error">
-										<label for="messageName" class="col-sm-3 control-label">Ваше имя</label>
+										<label for="name" class="col-sm-3 control-label">Ваше имя</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control has-error" id="name" name="name" placeholder="Ваше имя" value="" 
 											ng-model="message.name" ng-required="true">
@@ -96,7 +87,7 @@
 										</div>
 									</div>
 									<div class="form-group error">
-										<label for="messageEmail" class="col-sm-3 control-label">Email</label>
+										<label for="email" class="col-sm-3 control-label">Email</label>
 										<div class="col-sm-9">
 											<input type="email" class="form-control has-error" id="email" name="email" placeholder="Э-почта" value="" 
 											ng-model="message.email" ng-required="true">
@@ -105,14 +96,14 @@
 										</div>
 									</div>
 									<div class="form-group error">
-										<label for="messageLink" class="col-sm-3 control-label">Ссылка</label>
+										<label for="link" class="col-sm-3 control-label">Ссылка</label>
 										<div class="col-sm-9">
 											<input class="form-control" rows="3" class="form-control" id="link" name="link" placeholder="Ссылка на ваш сайт" value="" ng-model="message.link" ng-required="false" >
 										</div>										
 									</div>
 
 									<div class="form-group error">
-										<label for="messageText" class="col-sm-3 control-label">Сообщение</label>
+										<label for="text" class="col-sm-3 control-label">Сообщение</label>
 										<div class="col-sm-9">
 											<textarea class="form-control" rows="3" class="form-control has-error" id="text" name="text" placeholder="Текст сообщения" value="" ng-model="message.text" ng-required="true" ></textarea> 
 											<span class="help-inline" 
@@ -123,13 +114,13 @@
 								</form>
 							</div>
 							<div class="modal-footer" ng-init="Captcha()">
-				<input type="text" id="mainCaptcha" ng-model="mainCaptcha"/>
-              	<input type="button" id="refresh" value="Refresh" ng-click="Captcha();" /><br />
-                <input type="text" id="txtInput" ng-model="c" required/>    <br />
-                <br/>  
-                 <input id="Button1" type="button" value="Check" ng-click="ValidCaptcha()"/><br/>
-                 <br/>
-                 <br/>
+								<input type="text" id="mainCaptcha" ng-model="mainCaptcha" ng-disabled="true"/>
+								<span style="cursor:pointer;" class="glyphicon glyphicon-refresh" ng-click="Captcha();"></span><br />
+								<input type="text" id="txtInput" ng-model="c" required/>    <br />
+								<br/>
+								 <input id="Button1" type="button" value="Check" ng-click="ValidCaptcha()"/><br/>
+								 <br/>
+								 <br/>
 								<button type="button" class="btn btn-primary" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">Добавить сообщение </button>
 							</div>
 						</div>
@@ -142,7 +133,7 @@
 
       <hr>
 
-      <footer>
-        <p>&copy; 2018, Гостевая книга</p>
+      <footer class="text-center">
+        <p>&copy; A.Gilarov, 2018, Гостевая книга</p>
       </footer>
     </div> <!-- /container -->
