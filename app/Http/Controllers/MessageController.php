@@ -10,8 +10,11 @@ use App\Message;
 
 class MessageController extends Controller
 {
-    public function index(){
-		return Message::orderBy('created_at', 'desc')->paginate(10);
+    public function index(Request $request){
+
+        $propertyName = $request->input('sort');
+        $order = $request->input('order');
+		return Message::orderBy($propertyName, $order)->paginate(10);
 	}
 		
 	public function store(Request $request)
@@ -19,6 +22,7 @@ class MessageController extends Controller
 		$this->validate($request, [	'name' => 'required|max:255' ]);
 		$this->validate($request, [	'email' => 'required | email' ]);
 		$this->validate($request, [	'text' => 'required' ]);
+        //$this->validate($request, [	'link' => 'url' ]);
 		
 		$ip = request()->ip();
 		$browser = $_SERVER['HTTP_USER_AGENT'];
@@ -34,14 +38,14 @@ class MessageController extends Controller
 		}
 		else
 		    {
-		        $link = $request->input('link');
-                if (strpos($request->input('link'), 'www') == false) {
+		        /*$link = $request->input('link');
+                if (strpos($request->input('link'), 'http') == false) {
                     $link = "http://www." . $request->input('link');
-                }//http://www.
+                }*/
                     $message = Message::create([
                         'name' => $request->input('name'),
                         'email' => $request->input('email'),
-                        'link' => $link,
+                        'link' => $request->input('link'),
                         'text' => $request->input('text'),
                         'ip' => $ip,
                         'browser_info' => $browser

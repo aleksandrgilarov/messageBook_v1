@@ -4,11 +4,9 @@
       <div class="container">
         <h1>Гостевая книга</h1>
         <p>Гостевая книга где пользователи могут оставлять свои сообщения</p>
-        
       </div>
     </div>
-
-    <div class="container">
+	<div class="container">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-12">
@@ -110,15 +108,18 @@
 											ng-show="frmAddMessage.text.$invalid && frmAddMessage.text.$touched">Это поле обязательное</span>
 										</div>										
 									</div>
-									<div class="form-group">
-										<label for="text" class="col-sm-3 control-label">Ваша пикча</label>
+									<div class="row">
+										<label for="text" class="col-sm-3 control-label text-right">Ваша пикча</label>
 										<div class="col-sm-9">
 
-											<input type="file">
+											<button dropzone="dropzoneConfig">
+												Drag and drop files here or click to upload
+											</button>
 										</div>
 									</div>
 
 								</form>
+
 							</div>
 							<div class="modal-footer" ng-init="Captcha()">
 								<input type="text" id="mainCaptcha" ng-model="mainCaptcha" ng-disabled="true"/>
@@ -137,6 +138,7 @@
 		   </div>
         </div>
       </div>
+
 
       <hr>
 

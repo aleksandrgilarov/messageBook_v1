@@ -16,6 +16,8 @@
 	
 	<!-- custom CSS for the page -->
     <link href="css/messages.css" rel="stylesheet">
+    <link href="bower_components/dropzone/dist/basic.css" rel="stylesheet">
+    <link href="bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,6 +26,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
       <script src='https://www.google.com/recaptcha/api.js'></script>
+      <script>
+          var csrfToken = "{{csrf_token()}}";
+      </script>
 
   </head>
 
@@ -41,9 +46,6 @@
         </div>
       </div>
     </nav>
-
-    
-
 	<!-- MAIN CONTENT AND INJECTED VIEWS -->
     <div id="main">
         <!-- this is where content will be injected -->
@@ -60,7 +62,8 @@
 	<!-- AngularJS Application Scripts -->
 	<script src="app/app.module.js"></script>
 	<script src="app/messages/messages.controller.js"></script>
-	
+	<script src="bower_components/dropzone/dist/dropzone.js"></script>
+
 
 
 		

@@ -54,6 +54,21 @@ $scope.ValidCaptcha = function () {
         alert(false);
     }
 };
+        $scope.dropzoneConfig = {
+            'options': { // passed into the Dropzone constructor
+                'url': constants.API_URL + 'upload-image'
+            },
+            'eventHandlers': {
+                'sending': function (file, xhr, formData) {
+                    console.log('Sending');
+                    formData.append('_token', csrfToken);
+                },
+                'success': function (file, response) {
+                    console.log('Success');
+                    console.log(response);
+                }
+            }
+        };
 
 $scope.addMessage = function() {
 
@@ -121,5 +136,4 @@ $scope.addMessage = function() {
 	    page++;
 	    $scope.getPaginationData(page);
 	};
-
 	});

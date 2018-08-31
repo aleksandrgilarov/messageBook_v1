@@ -16,5 +16,13 @@ use Illuminate\Http\Request;
 
 
 
-Route::resource('messages','MessageController',['only'=>['index','store']]);
+//Route::resource('messages','MessageController', ['only'=>['index','store']]);
+Route::post('messages', 'MessageController@store');
+Route::get('messages', 'MessageController@index');
+Route::post('upload-image', function (Request $request){
+    //return response($request->all(), 201);
+    $path = $request->file('file')->store('images');
+    return $path;
+});
+
 
