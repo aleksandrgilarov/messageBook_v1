@@ -27,17 +27,17 @@
 								<th>ID</th>
 								<th>
 								<button ng-click="sortBy('name')">Имя</button>
-        						<span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span></th>
+        						<span class="sortorder" ng-show="propertyName === 'name'"></span></th>
 								<th>Email</th>
 								<th>Ссылка</th>
 								<th>Текст</th>
 								<th>
 		<button ng-click="sortBy('created_at')">Дата добавления</button>
-        <span class="sortorder" ng-show="propertyName === 'created_at'" ng-class="{reverse: reverse}"></span></th></th>
+        <span class="sortorder" ng-show="propertyName === 'created_at'"></span></th></th>
 							</tr>
 						</thead>
 						<tbody >
-							<tr ng-repeat="message in messages | orderBy:propertyName:reverse">
+							<tr ng-repeat="message in messages">
 								<td>{{  message.id }}</td>
 								<td>{{  message.name }}</td>
 								<td><a href="mailto:{{  message.email }}?Subject=Гостевая книга" target="_top">{{  message.email }}</a></td>
@@ -55,13 +55,13 @@
 			  <div class="row text-center">
 			 			<ul class="pagination" >
 						<li class="page-item" ng-class="{disabled: prev_page_url==null}">
-							  <a style="cursor: pointer" class="page-link" ng-click="getPaginationData(prev_page_url)"><<</a>
+							  <a style="cursor: pointer" class="page-link" ng-click="getPrevPage(currentPage)"><<</a>
 						</li>
 							<li ng-repeat= "page in pages" ng-class="{disabled, active: currentPage==page}">
-								<a style="cursor: pointer" class="page-link" ng-click="getPaginationData2(page)">{{page}}</a>
+								<a style="cursor: pointer" class="page-link" ng-click="getPaginationData(page)">{{page}}</a>
 						   </li>
 						 <li class="page-item" ng-class="{disabled: next_page_url==null}">
-							  <a style="cursor: pointer" class="page-link" ng-click="getPaginationData(next_page_url)">>></a>
+							  <a style="cursor: pointer" class="page-link" ng-click="getNextPage(currentPage)">>></a>
 							</li>
 						 </ul>
 			  </div>
@@ -109,6 +109,13 @@
 											<span class="help-inline" 
 											ng-show="frmAddMessage.text.$invalid && frmAddMessage.text.$touched">Это поле обязательное</span>
 										</div>										
+									</div>
+									<div class="form-group">
+										<label for="text" class="col-sm-3 control-label">Ваша пикча</label>
+										<div class="col-sm-9">
+
+											<input type="file">
+										</div>
 									</div>
 
 								</form>

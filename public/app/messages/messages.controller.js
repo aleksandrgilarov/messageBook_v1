@@ -6,10 +6,12 @@
 		 $scope.next_page_url=null;
 		 $scope.lastPage=null;
 		 $scope.pages = [];
+		 $scope.propertyName = 'created_at';
+		 $scope.reverse = 'desc';
 		
 		//retrieve messages listing from API
 		$scope.getMessages = function() {
-            $http.get(constants.API_URL + "messages", {params: {page: $scope.currentPage}})
+            $http.get(constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.reverse)
                 .success(function (response) {
                     $scope.messages = response.data;
                     $scope.currentPage = response.current_page;
@@ -23,12 +25,12 @@
                 });
         };
 
-		$scope.propertyName = 'created_at';
-  		$scope.reverse = true;
-
   $scope.sortBy = function(propertyName) {
-    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+      if ($scope.reverse === 'desc'){
+    $scope.reverse = 'asc';}
+    else{$scope.reverse = 'desc'}
     $scope.propertyName = propertyName;
+    $scope.getMessages();
   };
 
   $scope.Captcha = function() {
@@ -54,7 +56,6 @@ $scope.ValidCaptcha = function () {
 };
 
 $scope.addMessage = function() {
-
 
     let string1 = $scope.mainCaptcha;
     let string2 = $scope.c;
@@ -83,13 +84,9 @@ $scope.addMessage = function() {
 
 		};
 		
-		
-		
 		// display the modal form
 		$scope.showModal = function() {
 			$('#addMessageModal').modal('show');
-
-
 		};
 		
 		// close the modal form
@@ -97,8 +94,9 @@ $scope.addMessage = function() {
 			$('#addMessageModal').modal('hide');
 		};
 
-		$scope.getPaginationData = function(page_url) {
-	    var url = page_url;
+		//pagination
+	$scope.getPaginationData = function(page) {
+	    var url = constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.reverse + "&page=" + page;
 	    if (url!=null) {
 	    $http.get(url)
 			.success(function(response) {
@@ -114,20 +112,14 @@ $scope.addMessage = function() {
 			});}
 	};
 
-	$scope.getPaginationData2 = function(page) {
-	    var url = constants.API_URL + "messages?page="+page;
-	    if (url!=null) {
-	    $http.get(url)
-			.success(function(response) {
-				$scope.messages = response.data;
-				$scope.currentPage = response.current_page;
-				$scope.lastPage = response.last_page;
-				$scope.prev_page_url= response.prev_page_url;
-				$scope.next_page_url= response.next_page_url;
-				//console.log($scope);
-				for (var i =0; i < $scope.lastPage; i++) {
-					$scope.pages[i] = i+1;
-				}
-			});}
-	}
+	$scope.getPrevPage = function (page) {
+	    page--;
+        $scope.getPaginationData(page);
+    };
+
+	$scope.getNextPage = function (page) {
+	    page++;
+	    $scope.getPaginationData(page);
+	};
+
 	});
