@@ -29,9 +29,10 @@
 								<th>Email</th>
 								<th>Ссылка</th>
 								<th>Текст</th>
+                                <th>Картинка</th>
 								<th>
 		<button ng-click="sortBy('created_at')">Дата добавления</button>
-        <span class="sortorder" ng-show="propertyName === 'created_at'"></span></th></th>
+        <span class="sortorder" ng-show="propertyName === 'created_at'"></span></th>
 							</tr>
 						</thead>
 						<tbody >
@@ -41,6 +42,11 @@
 								<td><a href="mailto:{{  message.email }}?Subject=Гостевая книга" target="_top">{{  message.email }}</a></td>
 								<td><a href="{{  message.link }}">{{  message.link }}</a></td>
 								<td>{{ message.text }}</td>
+                                <td><ul ng-repeat="image in message.images">
+									<a target="_blank" href="/storage/{{image.path}}">
+										<img src="/storage/{{image.path}}" alt="no picture" class="pic">
+									</a>
+								</ul></td>
 								<td>{{  message.created_at }}</td>
 								
 							</tr>
@@ -72,8 +78,9 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 								<h4 class="modal-title">Добавить новое сообщение</h4>
 							</div>
+                            <form name="frmAddMessage" class="form-horizontal dropzone" novalidate="">
 							<div class="modal-body">
-								<form name="frmAddMessage" class="form-horizontal" novalidate="">
+
 
 									<div class="form-group error">
 										<label for="name" class="col-sm-3 control-label">Ваше имя</label>
@@ -112,13 +119,13 @@
 										<label for="text" class="col-sm-3 control-label text-right">Ваша пикча</label>
 										<div class="col-sm-9">
 
-											<button dropzone="dropzoneConfig">
-												Drag and drop files here or click to upload
-											</button>
+                                            <button dropzone="dropzoneConfig">
+                                                    Drag and drop files here or click to upload
+                                            </button>
 										</div>
 									</div>
 
-								</form>
+
 
 							</div>
 							<div class="modal-footer" ng-init="Captcha()">
@@ -131,6 +138,7 @@
 								 <br/>
 								<button type="button" class="btn btn-primary" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">Добавить сообщение </button>
 							</div>
+                            </form>
 						</div>
 					</div>
 				</div>

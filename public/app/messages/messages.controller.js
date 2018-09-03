@@ -56,7 +56,8 @@ $scope.ValidCaptcha = function () {
 };
         $scope.dropzoneConfig = {
             'options': { // passed into the Dropzone constructor
-                'url': constants.API_URL + 'upload-image'
+                'url': constants.API_URL + 'upload-image',
+                'autoProcessQueue': false
             },
             'eventHandlers': {
                 'sending': function (file, xhr, formData) {
@@ -74,13 +75,14 @@ $scope.addMessage = function() {
 
     let string1 = $scope.mainCaptcha;
     let string2 = $scope.c;
-    if (string1 == string2) {
+    if (string1 === string2) {
         $http.post(constants.API_URL + "messages", $scope.message)//add the new message to our listing
             .success(function () {
                 $scope.closeModal();
                 //retrieve messages listing from API
                 $scope.getMessages();
                 $scope.message = {};
+                console.log('added msg');
             })
 
             .error(function (response, status, headers, config) {
@@ -96,6 +98,7 @@ $scope.addMessage = function() {
         alert("Invalid Captcha");
     }
     $scope.c = "";
+    $scope.dropzone.processQueue();
 
 		};
 		
@@ -129,11 +132,13 @@ $scope.addMessage = function() {
 
 	$scope.getPrevPage = function (page) {
 	    page--;
+	    if (page != 0) 
         $scope.getPaginationData(page);
     };
 
 	$scope.getNextPage = function (page) {
 	    page++;
+	    if (page <= $scope.lastPage)
 	    $scope.getPaginationData(page);
 	};
 	});

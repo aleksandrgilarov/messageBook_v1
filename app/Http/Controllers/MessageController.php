@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Message;
+use App\Image;
+use DB;
 
 class MessageController extends Controller
 {
@@ -14,7 +16,7 @@ class MessageController extends Controller
 
         $propertyName = $request->input('sort');
         $order = $request->input('order');
-		return Message::orderBy($propertyName, $order)->paginate(10);
+		return Message::orderBy($propertyName, $order)->with('images')->paginate(10);
 	}
 		
 	public function store(Request $request)
@@ -23,37 +25,39 @@ class MessageController extends Controller
 		$this->validate($request, [	'email' => 'required | email' ]);
 		$this->validate($request, [	'text' => 'required' ]);
         //$this->validate($request, [	'link' => 'url' ]);
-		
+
 		$ip = request()->ip();
 		$browser = $_SERVER['HTTP_USER_AGENT'];
-		
-		if ($request->input('link') == '') {
-			$message = Message::create([
-			'name' => $request->input('name'),
-			'email' => $request->input('email'),
-			'text' => $request->input('text'),
-			'ip' => $ip,
-			'browser_info' => $browser
-		]);
-		}
-		else
-		    {
-		        /*$link = $request->input('link');
-                if (strpos($request->input('link'), 'http') == false) {
-                    $link = "http://www." . $request->input('link');
-                }*/
+
+        $path = $request->file('file');
+
+        if ($request->input('link') != null)
+            $link = $request->input('link');
+        else
+            $link = null;
                     $message = Message::create([
                         'name' => $request->input('name'),
                         'email' => $request->input('email'),
-                        'link' => $request->input('link'),
+                        'link' => $link,
                         'text' => $request->input('text'),
+                        'image_url' => $path,
                         'ip' => $ip,
                         'browser_info' => $browser
                     ]);
-		    }
-			
+
 		return $message;
 	}
-	
-	
+
+	public function uploadPic (Request $request)
+    {
+        $path = $request->file('file')->store('public');
+        $path = substr($path, 7);
+        $id = DB::table('messages')->orderBy('created_at', 'desc')->first();
+        $msg_id = $id->id;
+        $image = Image::create([
+            'path' => $path,
+            'message_id' => $msg_id
+        ]);
+        return $image;
+    }
 }

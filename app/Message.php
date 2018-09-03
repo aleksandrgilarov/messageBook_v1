@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    public $fillable = ['name','email', 'link','text', 'ip', 'browser_info'];
+    protected $fillable = ['name','email', 'link', 'text', 'ip', 'browser_info'];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
