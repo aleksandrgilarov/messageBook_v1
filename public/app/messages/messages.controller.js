@@ -72,7 +72,6 @@ $scope.ValidCaptcha = function () {
         };
 
 $scope.addMessage = function() {
-
     let string1 = $scope.mainCaptcha;
     let string2 = $scope.c;
     if (string1 === string2) {
@@ -99,6 +98,8 @@ $scope.addMessage = function() {
     }
     $scope.c = "";
     $scope.dropzone.processQueue();
+    //$scope.dropzone.removeAllFiles();
+
 
 		};
 		

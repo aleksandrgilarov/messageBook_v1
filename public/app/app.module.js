@@ -31,6 +31,10 @@ GuestBook.directive('dropzone', function () {
         angular.forEach(config.eventHandlers, function (handler, event) {
             scope.dropzone.on(event, handler);
         });
+
+        scope.dropzone.on("complete", function(file) {
+            scope.dropzone.removeFile(file);
+        });
     };
     return {
         restrict: "A",
