@@ -18,9 +18,11 @@
                     $scope.lastPage = response.last_page;
                     $scope.prev_page_url = response.prev_page_url;
                     $scope.next_page_url = response.next_page_url;
-                    //console.log($scope);
-                    for (var i = 0; i < $scope.lastPage; i++) {
-                        $scope.pages[i] = i + 1;
+                    var i = 0;
+                    if ($scope.currentPage-3<=0)
+                        i = $scope.currentPage - 2;
+                    for (i; i <= 4; i++) {
+                        $scope.pages[i] = i+1;
                     }
                 });
         };
@@ -123,12 +125,17 @@ $scope.addMessage = function() {
 				$scope.messages = response.data;
 				$scope.currentPage = response.current_page;
 				$scope.lastPage = response.last_page;
-				$scope.prev_page_url= response.prev_page_url;
-				$scope.next_page_url= response.next_page_url;
+                //$scope.prev_page_url= response.prev_page_url;
+				//$scope.next_page_url= response.next_page_url;
 				//console.log($scope);
-				for (var i =0; i < $scope.lastPage; i++) {
+                //$scope.pages.;
+                var i = 0;
+                if ($scope.currentPage-3<=0)
+                    i = $scope.currentPage - 2;
+				for (i; i <= 4; i++) {
 					$scope.pages[i] = i+1;
 				}
+				console.log($scope.pages);
 			});}
 	};
 

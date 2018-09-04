@@ -165,6 +165,7 @@ return [
 
 
 
+
         /*
          * Package Service Providers...
          */
@@ -179,6 +180,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+
 
     ],
 
