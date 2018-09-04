@@ -44,7 +44,7 @@
 								<td>{{ message.text }}</td>
                                 <td><ul ng-repeat="image in message.images">
 									<a target="_blank" href="/storage/{{image.path}}">
-										<img src="/storage/{{image.path}}" alt="no picture" class="pic">
+										<img id="myImg" src="/storage/{{image.path}}" alt="no picture" class="pic">
 									</a>
 								</ul></td>
 								<td>{{  message.created_at }}</td>
@@ -54,6 +54,7 @@
 					</table> 
 					<!-- End of Table-to-load-the-data Part -->					
 				</div>
+
 
 				<!--Pagination-->
 			  <div class="row text-center">

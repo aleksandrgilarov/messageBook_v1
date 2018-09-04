@@ -57,7 +57,8 @@ $scope.ValidCaptcha = function () {
         $scope.dropzoneConfig = {
             'options': { // passed into the Dropzone constructor
                 'url': constants.API_URL + 'upload-image',
-                'autoProcessQueue': false
+                'autoProcessQueue': false,
+                'maxFiles': 1
             },
             'eventHandlers': {
                 'sending': function (file, xhr, formData) {

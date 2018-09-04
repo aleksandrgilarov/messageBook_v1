@@ -64,10 +64,5 @@
 	<script src="app/messages/messages.controller.js"></script>
 	<script src="bower_components/dropzone/dist/dropzone.js"></script>
 
-
-
-		
-		
-
   </body>
 </html>
