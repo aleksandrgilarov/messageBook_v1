@@ -62,7 +62,7 @@
             $scope.dropzone.removeAllFiles();
         };
 
-$scope.addMessage = function() {
+    $scope.addMessage = function() {
         $http.post(constants.API_URL + "messages", $scope.message)//add the new message to our listing
             .success(function () {
                 $scope.closeModal();
@@ -78,11 +78,9 @@ $scope.addMessage = function() {
             .error(function (response, status, headers, config) {
                 $scope.err = response.errors;
             });
-
-
 		};
 
-var widgetId;
+        var widgetId;
         $scope. onWidgetCreate = function(_widgetId){
             widgetId = _widgetId;
         };

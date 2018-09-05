@@ -15,7 +15,7 @@
 				<div class="col-md-8">
 					<h1>Сообщения</h1>
 				</div>
-				<div class="col-md-4 text-right"><button type="submit" class="btn btn-success btn-lg" style="margin-top: 20px" ng-click="showModal()">Добавить новое сообщение <i class="glyphicon glyphicon-plus"></i></button></div>
+				<div class="col-md-4 text-right"><button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px" ng-click="showModal()">Добавить новое сообщение <i class="glyphicon glyphicon-plus"></i></button></div>
 			</div>
 			  <div class="row text-center"><h3>Ниже все сообщения оставленные пользователями.</h3></div>
 				<div class="col-md-12">
@@ -71,8 +71,6 @@
 							</div>
                             <form name="frmAddMessage" class="form-horizontal dropzone" novalidate="">
 							<div class="modal-body">
-
-
 									<div class="form-group error">
 										<label for="name" class="col-sm-3 control-label">Ваше имя</label>
 										<div class="col-sm-9">
@@ -121,12 +119,17 @@
 									</div>
 							</div>
 							<div class="modal-footer">
-								<div
-										vc-recaptcha
-										key="'6LcvT20UAAAAAIeQWBSWzdSydvqw5jbjLmv-aJk6'"
-										theme="dark"
-								></div>
-								<button type="button" class="btn btn-primary" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">Добавить сообщение </button>
+								<div class="row">
+										<div
+											vc-recaptcha
+											key="'6LcvT20UAAAAAIeQWBSWzdSydvqw5jbjLmv-aJk6'"
+											theme="dark"
+										></div>
+								</div>
+								<br>
+								<div class="row">
+									<button type="button" class="btn btn-lg btn-block btn-success" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">Добавить сообщение </button>
+								</div>
 							</div>
                             </form>
 						</div>
