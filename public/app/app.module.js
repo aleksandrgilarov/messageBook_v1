@@ -1,4 +1,4 @@
-var GuestBook = angular.module('GuestBook', ['ngRoute','ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+var GuestBook = angular.module('GuestBook', ['ngRoute','ngAnimate', 'ngSanitize', 'ui.bootstrap', 'vcRecaptcha']);
 
  // define our constant for the API
 GuestBook.constant('constants', {

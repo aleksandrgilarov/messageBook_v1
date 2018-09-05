@@ -23,16 +23,16 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>
-								<button ng-click="sortBy('name')">Имя</button>
-        						<span class="sortorder" ng-show="propertyName === 'name'"></span></th>
+								<th ng-click="sortBy('name')" style="cursor: pointer">
+								Имя <i ng-class="className"></i>
+        						</th>
 								<th>Email</th>
 								<th>Ссылка</th>
 								<th>Текст</th>
                                 <th>Картинка</th>
-								<th>
-		<button ng-click="sortBy('created_at')">Дата добавления</button>
-        <span class="sortorder" ng-show="propertyName === 'created_at'"></span></th>
+								<th ng-click="sortBy('created_at')" style="cursor: pointer">
+								Дата добавления	<i ng-class="classCrAt"></i>
+								</th>
 							</tr>
 						</thead>
 						<tbody >
@@ -80,6 +80,8 @@
 											ng-model="message.name" ng-required="true">
 											<span class="help-inline" 
 											ng-show="frmAddMessage.name.$invalid && frmAddMessage.name.$touched">Это поле обязательное</span>
+
+											<span style="color: red">{{err.name.toString()}}</span>
 										</div>
 									</div>
 									<div class="form-group error">
@@ -92,9 +94,10 @@
 										</div>
 									</div>
 									<div class="form-group error">
-										<label for="link" class="col-sm-3 control-label">Ссылка</label>
+										<label for="msgLink" class="col-sm-3 control-label">Ссылка</label>
 										<div class="col-sm-9">
-											<input class="form-control" rows="3" class="form-control" id="link" name="link" placeholder="Ссылка на ваш сайт" value="" ng-model="message.link" ng-required="false" >
+											<input class="form-control" rows="3" class="form-control" id="msgLink" name="msgLink" placeholder="Ссылка на ваш сайт" value="" ng-model="message.msgLink" ng-required="false" >
+											<span style="color: red" class="help-inline">{{err.msgLink.toString()}}</span>
 										</div>										
 									</div>
 
@@ -110,20 +113,19 @@
 										<label for="text" class="col-sm-3 control-label text-right">Ваша пикча</label>
 										<div class="col-sm-9">
 
-                                            <button dropzone="dropzoneConfig">
+                                            <button class="btn-primary btn-sm" dropzone="dropzoneConfig">
                                                     Drag and drop files here or click to upload
                                             </button>
+											<button ng-click="cancelPic()" class="btn-danger btn-sm">Отменить</button>
 										</div>
 									</div>
 							</div>
-							<div class="modal-footer" ng-init="Captcha()">
-								<input type="text" id="mainCaptcha" ng-model="mainCaptcha" ng-disabled="true"/>
-								<span style="cursor:pointer;" class="glyphicon glyphicon-refresh" ng-click="Captcha();"></span><br />
-								<input type="text" id="txtInput" ng-model="c" required/>    <br />
-								<br/>
-								 <input id="Button1" type="button" value="Check" ng-click="ValidCaptcha()"/><br/>
-								 <br/>
-								 <br/>
+							<div class="modal-footer">
+								<div
+										vc-recaptcha
+										key="'6LcvT20UAAAAAIeQWBSWzdSydvqw5jbjLmv-aJk6'"
+										theme="dark"
+								></div>
 								<button type="button" class="btn btn-primary" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">Добавить сообщение </button>
 							</div>
                             </form>
@@ -138,4 +140,4 @@
       <footer class="text-center">
         <p>&copy; A.Gilarov, 2018, Гостевая книга</p>
       </footer>
-    </div> 
+    </div>

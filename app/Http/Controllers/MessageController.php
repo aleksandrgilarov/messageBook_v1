@@ -24,26 +24,26 @@ class MessageController extends Controller
 		$this->validate($request, [	'name' => 'required|max:255' ]);
 		$this->validate($request, [	'email' => 'required | email' ]);
 		$this->validate($request, [	'text' => 'required' ]);
-        //$this->validate($request, [	'link' => 'url' ]);
+        $this->validate($request, [	'msgLink' => 'url' ]);
 
 		$ip = request()->ip();
 		$browser = $_SERVER['HTTP_USER_AGENT'];
 
         $path = $request->file('file');
 
-        if ($request->input('link') != null)
-            $link = $request->input('link');
+        if ($request->input('msgLink') != null)
+            $link = $request->input('msgLink');
         else
             $link = null;
-                    $message = Message::create([
-                        'name' => $request->input('name'),
-                        'email' => $request->input('email'),
-                        'link' => $link,
-                        'text' => $request->input('text'),
-                        'image_url' => $path,
-                        'ip' => $ip,
-                        'browser_info' => $browser
-                    ]);
+        $message = Message::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'link' => $link,
+            'text' => $request->input('text'),
+            'image_url' => $path,
+            'ip' => $ip,
+            'browser_info' => $browser
+        ]);
 
 		return $message;
 	}
