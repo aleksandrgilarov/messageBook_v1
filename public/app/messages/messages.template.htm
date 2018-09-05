@@ -55,20 +55,10 @@
 					<!-- End of Table-to-load-the-data Part -->					
 				</div>
 
-
 				<!--Pagination-->
 			  <div class="row text-center">
-			 			<ul class="pagination" >
-						<li class="page-item" ng-class="{disabled: prev_page_url==null}">
-							  <a style="cursor: pointer" class="page-link" ng-click="getPrevPage(currentPage)"><<</a>
-						</li>
-							<li ng-repeat= "page in pages" ng-class="{disabled, active: currentPage==page}">
-								<a style="cursor: pointer" class="page-link" ng-click="getPaginationData(page)">{{page}}</a>
-						   </li>
-						 <li class="page-item" ng-class="{disabled: next_page_url==null}">
-							  <a style="cursor: pointer" class="page-link" ng-click="getNextPage(currentPage)">>></a>
-							</li>
-						 </ul>
+				  <ul uib-pagination total-items="total" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="lastPage" ng-change="getPaginationData(currentPage)"></ul>
+				  <pre>Страница: {{currentPage}} / {{lastPage}}</pre>
 			  </div>
 
 				<!-- Modal-->
@@ -125,9 +115,6 @@
                                             </button>
 										</div>
 									</div>
-
-
-
 							</div>
 							<div class="modal-footer" ng-init="Captcha()">
 								<input type="text" id="mainCaptcha" ng-model="mainCaptcha" ng-disabled="true"/>
@@ -147,11 +134,8 @@
 		   </div>
         </div>
       </div>
-
-
       <hr>
-
       <footer class="text-center">
         <p>&copy; A.Gilarov, 2018, Гостевая книга</p>
       </footer>
-    </div> <!-- /container -->
+    </div> 

@@ -2,10 +2,10 @@
     GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants) {
 		// set our current page for pagination purposes
 		 $scope.currentPage=1;
-		 $scope.prev_page_url=null;
-		 $scope.next_page_url=null;
 		 $scope.lastPage=null;
 		 $scope.pages = [];
+		 $scope.total;
+        $scope.maxSize = 5;
 		 $scope.propertyName = 'created_at';
 		 $scope.reverse = 'desc';
 		
@@ -16,14 +16,7 @@
                     $scope.messages = response.data;
                     $scope.currentPage = response.current_page;
                     $scope.lastPage = response.last_page;
-                    $scope.prev_page_url = response.prev_page_url;
-                    $scope.next_page_url = response.next_page_url;
-                    var i = 0;
-                    if ($scope.currentPage-3<=0)
-                        i = $scope.currentPage - 2;
-                    for (i; i <= 4; i++) {
-                        $scope.pages[i] = i+1;
-                    }
+                    $scope.total = response.total;
                 });
         };
 
@@ -125,17 +118,7 @@ $scope.addMessage = function() {
 				$scope.messages = response.data;
 				$scope.currentPage = response.current_page;
 				$scope.lastPage = response.last_page;
-                //$scope.prev_page_url= response.prev_page_url;
-				//$scope.next_page_url= response.next_page_url;
-				//console.log($scope);
-                //$scope.pages.;
-                var i = 0;
-                if ($scope.currentPage-3<=0)
-                    i = $scope.currentPage - 2;
-				for (i; i <= 4; i++) {
-					$scope.pages[i] = i+1;
-				}
-				console.log($scope.pages);
+                $scope.total = response.total;
 			});}
 	};
 

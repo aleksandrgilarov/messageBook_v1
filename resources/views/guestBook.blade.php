@@ -29,7 +29,6 @@
       <script>
           var csrfToken = "{{csrf_token()}}";
       </script>
-
   </head>
 
   <body>
@@ -55,8 +54,12 @@
 	<!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
 	<script src="js/angular/angular.min.js"></script>
 	<script src="js/angular/angular-route.min.js"></script>
+	<script src="js/angular/angular-animate.js"></script>
+	<script src="js/angular/angular-touch.js"></script>
+	<script src="js/angular/angular-sanitize.js"></script>
 	<script src="js/angular-recaptcha/release/angular-recaptcha.js"></script>
 	<script src="js/jquery.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	
 	<!-- AngularJS Application Scripts -->
