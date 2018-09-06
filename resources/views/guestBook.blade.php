@@ -6,18 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="GuestBook">
     <meta name="author" content="Aleksandr Gilarov">
-
     <title>{{trans('messages.title')}}</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-   
-	
 	<!-- custom CSS for the page -->
     <link href="css/messages.css" rel="stylesheet">
     <link href="bower_components/dropzone/dist/basic.css" rel="stylesheet">
     <link href="bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

@@ -12,8 +12,8 @@ use DB;
 
 class MessageController extends Controller
 {
-    public function index(Request $request){
-
+    public function index(Request $request)
+    {
         $propertyName = $request->input('sort');
         $order = $request->input('order');
 		return Message::orderBy($propertyName, $order)->with('images')->paginate(10);
@@ -29,18 +29,16 @@ class MessageController extends Controller
 		$ip = request()->ip();
 		$browser = $_SERVER['HTTP_USER_AGENT'];
 
-        $path = $request->file('file');
-
-        if ($request->input('msgLink') != null)
+        if ($request->input('msgLink') != null) {
             $link = $request->input('msgLink');
-        else
+        } else {
             $link = null;
+        }
         $message = Message::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'link' => $link,
             'text' => $request->input('text'),
-            'image_url' => $path,
             'ip' => $ip,
             'browser_info' => $browser
         ]);
