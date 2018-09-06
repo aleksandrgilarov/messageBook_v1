@@ -1,16 +1,26 @@
-// create the controller and inject Angular's $scope
 GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants, vcRecaptchaService) {
 
-    $scope.currentPage=1;
-    $scope.lastPage=null;
-    $scope.pages = [];
-    $scope.total;
+    $scope.currentPage = 1;
+    $scope.lastPage = null;
+    $scope.total = null;
     $scope.maxSize = 5;
     $scope.propertyName = 'created_at';
     $scope.reverse = 'desc';
     $scope.err = '';
     $scope.classCrAt = "glyphicon glyphicon-arrow-down";
     $scope.className = "";
+    $scope.dropzoneConfig = {
+        'options': { // passed into the Dropzone constructor
+            'url': constants.API_URL + 'upload-image',
+            'autoProcessQueue': false,
+            'maxFiles': 1
+        },
+        'eventHandlers': {
+            'sending': function (file, xhr, formData) {
+                formData.append('_token', csrfToken);
+            }
+        }
+    };
 
     //retrieve messages listing from API
     $scope.getMessages = function() {
@@ -47,33 +57,18 @@ GuestBook.controller('messagesController', function messagesController($scope, $
       $scope.getMessages();
     };
 
-    $scope.dropzoneConfig = {
-        'options': { // passed into the Dropzone constructor
-            'url': constants.API_URL + 'upload-image',
-            'autoProcessQueue': false,
-            'maxFiles': 1
-        },
-        'eventHandlers': {
-            'sending': function (file, xhr, formData) {
-                formData.append('_token', csrfToken);
-            }
-        }
-    };
-
     $scope.cancelPic = function(){
         $scope.dropzone.removeAllFiles();
     };
 
     $scope.addMessage = function() {
-        $http.post(constants.API_URL + "messages", $scope.message)//add the new message to our listing
+        $http.post(constants.API_URL + "messages", $scope.message)
             .success(function () {
                 $scope.closeModal();
-                //retrieve messages listing from API
                 $scope.getMessages();
                 $scope.message = {};
                 //upload picture
                 $scope.dropzone.processQueue();
-                //$scope.dropzone.removeAllFiles();
                 vcRecaptchaService.reload(widgetId);
             })
             .error(function (response, status, headers, config) {
@@ -82,22 +77,19 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     };
 
     var widgetId;
-    $scope. onWidgetCreate = function(_widgetId){
+    $scope.onWidgetCreate = function(_widgetId){
         widgetId = _widgetId;
     };
-		
-    // display the modal form
+
     $scope.showModal = function() {
         $scope.err = '';
         $('#addMessageModal').modal('show');
     };
 
-    // close the modal form
     $scope.closeModal = function() {
         $('#addMessageModal').modal('hide');
     };
 
-		//pagination
 	$scope.getPaginationData = function(page) {
 	    var url = constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.reverse + "&page=" + page;
 	    if (url!=null) {

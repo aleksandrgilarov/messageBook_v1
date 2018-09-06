@@ -24,6 +24,9 @@ return [
     "modal_pic_btn" => "Перетяните или нажмите чтобы выбрать картинку",
     "modal_pic_cancel" => "Отменить",
     "modal_add_msg_btn" => "Добавить сообщение",
+    "email_placeholder" => "Э-почта",
+    "link_placeholder" => "Ссылка на ваш сайт",
+    "text_placeholder" => "Текст сообщения",
 
     //errors
     "field_required" => "Это поле обязательное",
