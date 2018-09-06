@@ -9,7 +9,7 @@ GuestBook.constant('constants', {
 GuestBook.config(function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl : 'app/messages/messages.template.htm',
+			templateUrl : 'messages.html',
 			controller  : 'messagesController'
 		})
 		.otherwise({
