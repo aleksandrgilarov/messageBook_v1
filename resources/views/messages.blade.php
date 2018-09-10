@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron" ng-init="getMessages()">
     <div class="container">
         <h1>{{trans('messages.title')}}</h1>
         <p>{{trans('messages.title_dscr')}}</p>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row text-center"><h3>{{trans('messages.tableDscr')}}</h3></div>
-        <table class="table table-list-search table-striped" id="myTable" ng-init="getMessages()">
+        <table class="table table-list-search table-striped" id="myTable">
             <thead>
             <tr>
                 <th>ID</th>
@@ -39,11 +39,9 @@
                 <td><a href="@{{  message.link }}">@{{  message.link }}</a></td>
                 <td>@{{ message.text }}</td>
                 <td>
-                    <ul ng-repeat="image in message.images">
-                        <a target="_blank" href="/storage/@{{image.path}}">
-                            <img id="myImg" src="/storage/@{{image.path}}" alt="no picture" class="pic">
-                        </a>
-                    </ul>
+                    <a  ng-if="message.images[0].path.length" target="_blank" href="/storage/@{{message.images[0].path}}">
+                        <img id="myImg" ng-src="/storage/@{{message.images[0].path}}" alt="no picture" class="pic">
+                    </a>
                 </td>
                 <td>@{{  message.created_at }}</td>
 
@@ -121,7 +119,7 @@
                     <div class="row">
                         <div
                                 vc-recaptcha
-                                key="'6LcvT20UAAAAAIeQWBSWzdSydvqw5jbjLmv-aJk6'"
+                                key="'6LdmBG8UAAAAAOAEfE1RkyH_mkb_KBR3UhP_NUDU'"
                                 theme="dark"
                         ></div>
                     </div>

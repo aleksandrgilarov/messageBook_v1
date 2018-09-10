@@ -21,6 +21,7 @@ GuestBook.controller('messagesController', function messagesController($scope, $
             }
         }
     };
+    Dropzone.autoDiscover = false;
 
     //retrieve messages listing from API
     $scope.getMessages = function() {

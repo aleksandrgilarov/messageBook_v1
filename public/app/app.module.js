@@ -2,7 +2,7 @@ var GuestBook = angular.module('GuestBook', ['ngRoute','ngAnimate', 'ngSanitize'
 
  // define our constant for the API
 GuestBook.constant('constants', {
-		API_URL: 'http://192.168.1.191/api/'
+		API_URL: '/api/'
 	});
 	
 // configure our routes
