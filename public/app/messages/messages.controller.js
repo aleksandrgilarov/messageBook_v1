@@ -5,8 +5,6 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     $scope.total = null;
     $scope.maxSize = 5;
     $scope.propertyName = 'created_at';
-    //$scope.orderCrAt = 'desc';
-    //$scope.orderName = 'desc';
     $scope.order = 'desc'; //default sorting value
     $scope.err = '';
     $scope.classCrAt = "glyphicon glyphicon-arrow-down";
@@ -50,10 +48,10 @@ GuestBook.controller('messagesController', function messagesController($scope, $
             $scope.classCrAt = '';
             if ($scope.className === 'glyphicon glyphicon-arrow-down'){
                 $scope.className = 'glyphicon glyphicon-arrow-up';
-                $scope.order = 'asc';
+                $scope.order = 'desc';
             } else {
                 $scope.className = "glyphicon glyphicon-arrow-down";
-                $scope.order = 'desc';
+                $scope.order = 'asc';
             }
         }
       $scope.propertyName = propertyName;
