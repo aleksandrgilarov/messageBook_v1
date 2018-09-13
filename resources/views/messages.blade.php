@@ -1,4 +1,4 @@
-<div class="jumbotron" ng-init="getMessages()">
+<div class="jumbotron">
     <div class="container">
         <h1>{{trans('messages.title')}}</h1>
         <p>{{trans('messages.title_dscr')}}</p>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row text-center"><h3>{{trans('messages.tableDscr')}}</h3></div>
-        <table class="table table-list-search table-striped" id="myTable">
+        <table class="table table-list-search table-striped" id="myTable" ng-init="getMessages()">
             <thead>
             <tr>
                 <th>ID</th>
