@@ -5,7 +5,9 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     $scope.total = null;
     $scope.maxSize = 5;
     $scope.propertyName = 'created_at';
-    $scope.reverse = 'desc';
+    //$scope.orderCrAt = 'desc';
+    //$scope.orderName = 'desc';
+    $scope.order = 'desc'; //default sorting value
     $scope.err = '';
     $scope.classCrAt = "glyphicon glyphicon-arrow-down";
     $scope.className = "";
@@ -25,7 +27,7 @@ GuestBook.controller('messagesController', function messagesController($scope, $
 
     //retrieve messages listing from API
     $scope.getMessages = function() {
-        $http.get(constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.reverse)
+        $http.get(constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.order)
             .success(function (response) {
                 $scope.messages = response.data;
                 $scope.currentPage = response.current_page;
@@ -35,25 +37,25 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     };
 
     $scope.sortBy = function(propertyName) {
-      if ($scope.reverse === 'desc'){
-        $scope.reverse = 'asc';
         if (propertyName === 'created_at'){
-            $scope.classCrAt = "glyphicon glyphicon-arrow-up";
-            $scope.className = "";
-        } else {
-            $scope.className = "glyphicon glyphicon-arrow-up";
-            $scope.classCrAt = "";
-        }
-      } else {
-            $scope.reverse = 'desc';
-            if (propertyName === 'created_at') {
-              $scope.classCrAt = "glyphicon glyphicon-arrow-down";
-              $scope.className = "";
+            $scope.className = '';
+            if ($scope.classCrAt === 'glyphicon glyphicon-arrow-down'){
+                $scope.classCrAt = 'glyphicon glyphicon-arrow-up';
+                $scope.order = 'asc';
+            } else {
+                $scope.classCrAt = "glyphicon glyphicon-arrow-down";
+                $scope.order = 'desc';
+            }
+        } else if (propertyName === 'name') {
+            $scope.classCrAt = '';
+            if ($scope.className === 'glyphicon glyphicon-arrow-down'){
+                $scope.className = 'glyphicon glyphicon-arrow-up';
+                $scope.order = 'asc';
             } else {
                 $scope.className = "glyphicon glyphicon-arrow-down";
-                $scope.classCrAt = "";
+                $scope.order = 'desc';
             }
-      }
+        }
       $scope.propertyName = propertyName;
       $scope.getMessages();
     };
