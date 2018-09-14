@@ -92,7 +92,7 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     };
 
 	$scope.getPaginationData = function(page) {
-	    var url = constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.reverse + "&page=" + page;
+	    var url = constants.API_URL + "messages?sort=" + $scope.propertyName + '&order=' + $scope.order + "&page=" + page;
 	    if (url!=null) {
 	    $http.get(url)
 			.success(function(response) {
