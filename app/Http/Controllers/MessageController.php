@@ -48,6 +48,7 @@ class MessageController extends Controller
 
 	public function uploadPic (Request $request)
     {
+        $this->validate($request, ['file' => 'image|mimes:jpg,jpeg,png,bmp']);
         $path = $request->file('file')->store('public');
         $path = substr($path, 7);
         $id = DB::table('messages')->orderBy('created_at', 'desc')->first();

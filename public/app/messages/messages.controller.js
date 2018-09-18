@@ -1,4 +1,4 @@
-GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants, vcRecaptchaService) {
+GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants, vcRecaptchaService, $uibModal, $log, $document) {
 
     $scope.currentPage = 1;
     $scope.lastPage = null;
@@ -13,13 +13,15 @@ GuestBook.controller('messagesController', function messagesController($scope, $
         'options': { // passed into the Dropzone constructor
             'url': constants.API_URL + 'upload-image',
             'autoProcessQueue': false,
-            'maxFiles': 1
+            'maxFiles': 1,
+            acceptedFiles: "image/jpeg,image/jpg,image/bmp,image/png",
+
         },
         'eventHandlers': {
             'sending': function (file, xhr, formData) {
                 formData.append('_token', csrfToken);
             }
-        }
+        },
     };
     Dropzone.autoDiscover = false;
 

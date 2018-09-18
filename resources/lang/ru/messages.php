@@ -30,7 +30,7 @@ return [
 
     //errors
     "field_required" => "Это поле обязательное",
-    "required_email" => "Это поле обязательное и должно быть в формате e-mail@domain.example",
+    "invalid_email" => "Это поле должно быть в формате e-mail@domain.example",
 
     "footer" => "A.Gilarov, 2018, Гостевая книга"
 ];

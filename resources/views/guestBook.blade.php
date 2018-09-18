@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="GuestBook">
+<html lang="en" ng-app="GuestBook" ng-controller="messagesController as msgCntrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,6 @@
     <meta name="description" content="GuestBook">
     <meta name="author" content="Aleksandr Gilarov">
     <title>{{trans('messages.title')}}</title>
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- custom CSS for the page -->
     <link href="css/messages.css" rel="stylesheet">
