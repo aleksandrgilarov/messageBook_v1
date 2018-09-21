@@ -1,5 +1,6 @@
-GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants, vcRecaptchaService, $uibModal, $log, $document) {
+GuestBook.controller('messagesController', function messagesController($scope, $http, $location, constants, vcRecaptchaService, $uibModal) {
 
+    $scope.message = {};
     $scope.currentPage = 1;
     $scope.lastPage = null;
     $scope.total = null;
@@ -9,12 +10,13 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     $scope.err = '';
     $scope.classCrAt = "glyphicon glyphicon-arrow-down";
     $scope.className = "";
+    var modalInstance;
     $scope.dropzoneConfig = {
         'options': { // passed into the Dropzone constructor
             'url': constants.API_URL + 'upload-image',
             'autoProcessQueue': false,
             'maxFiles': 1,
-            acceptedFiles: "image/jpeg,image/jpg,image/bmp,image/png",
+            'acceptedFiles' : "image/jpeg,image/jpg,image/bmp,image/png",
 
         },
         'eventHandlers': {
@@ -60,37 +62,9 @@ GuestBook.controller('messagesController', function messagesController($scope, $
       $scope.getMessages();
     };
 
-    $scope.cancelPic = function(){
-        $scope.dropzone.removeAllFiles();
-    };
-
-    $scope.addMessage = function() {
-        $http.post(constants.API_URL + "messages", $scope.message)
-            .success(function () {
-                $scope.closeModal();
-                $scope.getMessages();
-                $scope.message = {};
-                //upload picture
-                $scope.dropzone.processQueue();
-                vcRecaptchaService.reload(widgetId);
-            })
-            .error(function (response, status, headers, config) {
-                $scope.err = response.errors;
-            });
-    };
-
     var widgetId;
     $scope.onWidgetCreate = function(_widgetId){
         widgetId = _widgetId;
-    };
-
-    $scope.showModal = function() {
-        $scope.err = '';
-        $('#addMessageModal').modal('show');
-    };
-
-    $scope.closeModal = function() {
-        $('#addMessageModal').modal('hide');
     };
 
 	$scope.getPaginationData = function(page) {
@@ -105,4 +79,16 @@ GuestBook.controller('messagesController', function messagesController($scope, $
 			});
 	    }
 	};
+
+    $scope.open = function () {
+        //console.log($scope);
+        modalInstance =  $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'myModalContent.html',
+            controller: 'messageController',
+            scope: $scope
+        });
+    };
 });

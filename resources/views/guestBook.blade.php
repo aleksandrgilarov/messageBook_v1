@@ -36,6 +36,7 @@
       <!-- AngularJS Application Scripts -->
       <script src="app/app.module.js"></script>
       <script src="app/messages/messages.controller.js"></script>
+      <script src="app/messages/message.controller.js"></script>
       <script src="bower_components/dropzone/dist/dropzone.js"></script>
   </head>
 
@@ -59,6 +60,9 @@
         <div ng-view></div>
         <script type="text/ng-template" id="messages.html">
             @include("messages")
+        </script>
+        <script type="text/ng-template" id="myModalContent.html">
+              @include("messageModal")
         </script>
     </div>
   </body>
