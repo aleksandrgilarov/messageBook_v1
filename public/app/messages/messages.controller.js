@@ -17,7 +17,14 @@ GuestBook.controller('messagesController', function messagesController($scope, $
             'autoProcessQueue': false,
             'maxFiles': 1,
             'acceptedFiles' : "image/jpeg,image/jpg,image/bmp,image/png",
+            init: function() {
+                this.on("error", function(file, response) {
+                    $scope.errorMessage = response;
+                    console.log($scope.errorMessage);
+                    alert(response);
+                });
 
+            }
         },
         'eventHandlers': {
             'sending': function (file, xhr, formData) {
@@ -25,6 +32,7 @@ GuestBook.controller('messagesController', function messagesController($scope, $
             }
         },
     };
+
     Dropzone.autoDiscover = false;
 
     //retrieve messages listing from API
