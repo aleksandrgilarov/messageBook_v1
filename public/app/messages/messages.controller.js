@@ -5,8 +5,6 @@ GuestBook.controller('messagesController', function messagesController($scope, $
     $scope.lastPage = null;
     $scope.total = null;
     $scope.maxSize = 5;
-    $scope.errorMessage = '';
-    $scope.hasErr = false;
     $scope.propertyName = 'created_at';
     $scope.order = 'desc'; //default sorting value
     $scope.err = '';
