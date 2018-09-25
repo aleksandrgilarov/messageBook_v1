@@ -20,11 +20,11 @@ GuestBook.controller('messageController', function ($http, constants, vcRecaptch
                 formData.append('_token', csrfToken);
             },
             'addedfile': function (file) {
-                $scope.errorMessage = 'Ok';
+                $scope.errorMessage = 'Ok'; 
                 $scope.$apply();
             },
             'success': function (file){
-                $scope.getMessages();
+                $scope.getMessages(); //if there is a pic to upload we retrieve messages after the it's been uploaded 
             }
         },
     };
@@ -36,7 +36,7 @@ GuestBook.controller('messageController', function ($http, constants, vcRecaptch
             .success(function () {
                 $scope.dropzone.processQueue();
                 $uibModalInstance.close();
-                if ($scope.errorMessage == '') {
+                if ($scope.errorMessage == '') { //if there is no pic we retrieve messages here
                     $scope.getMessages();
                 }
             })
