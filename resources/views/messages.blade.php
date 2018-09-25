@@ -40,9 +40,11 @@
                 <td><a href="@{{  message.link }}">@{{  message.link }}</a></td>
                 <td>@{{ message.text }}</td>
                 <td>
-                    <a  ng-if="message.images[0].path.length" target="_blank" href="/storage/@{{message.images[0].path}}">
-                        <img id="myImg" ng-src="/storage/@{{message.images[0].path}}" alt="no picture" class="pic">
-                    </a>
+                    <div ng-if="message.images[0].path.length">
+                        <a target="_blank" href="/storage/@{{message.images[0].path}}">
+                            <img id="myImg" ng-src="/storage/@{{message.images[0].path}}" alt="no picture" class="pic">
+                        </a>
+                    </div>
                 </td>
                 <td>@{{  message.created_at }}</td>
             </tr>

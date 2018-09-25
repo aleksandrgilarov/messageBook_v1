@@ -9,8 +9,8 @@
             <div class="col-sm-9">
                 <input type="text" class="form-control has-error vld" id="name" name="name" placeholder="{{trans('messages.modal_name')}}" value=""
                        ng-model="message.name" ng-required="true">
-                <span class="help-inline" style="color: red" ng-show="frmAddMessage.name.$invalid && frmAddMessage.name.$touched">{{trans('messages.field_required')}}</span>
-                <span style="color: red">@{{err.name.toString()}}</span>
+                <span class="help-inline red" ng-show="frmAddMessage.name.$invalid && frmAddMessage.name.$touched">{{trans('messages.field_required')}}</span>
+                <span class="red">@{{err.name.toString()}}</span>
             </div>
         </div>
         <div class="form-group error">
@@ -18,7 +18,7 @@
             <div class="col-sm-9">
                 <input type="email" class="form-control has-error vld" id="email" name="email" placeholder="{{trans('messages.email_placeholder')}}" value=""
                        ng-model="message.email" ng-required="true">
-                <span class="help-inline" style="color: red"
+                <span class="help-inline red"
                       ng-show="frmAddMessage.email.$invalid && frmAddMessage.email.$touched">{{trans('messages.invalid_email')}}</span>
             </div>
         </div>
@@ -26,14 +26,14 @@
             <label for="msgLink" class="col-sm-3 control-label">{{trans('messages.link')}}</label>
             <div class="col-sm-9">
                 <input class="form-control" rows="3" class="form-control" id="msgLink" name="msgLink" placeholder="{{trans('messages.link_placeholder')}}" value="" ng-model="message.msgLink" ng-required="false" >
-                <span style="color: red" class="help-inline">@{{err.msgLink.toString()}}</span>
+                <span class="help-inline red">@{{err.msgLink.toString()}}</span>
             </div>
         </div>
         <div class="form-group error">
             <label for="text" class="col-sm-3 control-label">{{trans('messages.modal_msg')}}</label>
             <div class="col-sm-9">
                 <textarea class="form-control vld" rows="3" class="form-control has-error" id="text" name="text" placeholder="{{trans('messages.text_placeholder')}}" value="" ng-model="message.text" ng-required="true" ></textarea>
-                <span class="help-inline" style="color: red" ng-show="frmAddMessage.text.$invalid && frmAddMessage.text.$touched">{{trans('messages.field_required')}}</span>
+                <span class="help-inline red" ng-show="frmAddMessage.text.$invalid && frmAddMessage.text.$touched">{{trans('messages.field_required')}}</span>
             </div>
         </div>
         <div class="row">

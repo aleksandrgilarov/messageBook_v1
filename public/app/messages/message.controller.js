@@ -1,7 +1,7 @@
 GuestBook.controller('messageController', function ($http, constants, vcRecaptchaService, $scope, $uibModalInstance) {
 
     $scope.message = {};
-    $scope.hasError = false;
+    $scope.errorMessage = '';
     $scope.dropzoneConfig = {
         'options': { // passed into the Dropzone constructor
             'url': constants.API_URL + 'upload-image',
@@ -10,7 +10,6 @@ GuestBook.controller('messageController', function ($http, constants, vcRecaptch
             'acceptedFiles' : "image/jpeg,image/jpg,image/bmp,image/png",
             init : function() {
                 this.on("error", function(file, response) {
-                    $scope.hasError = true;
                     $scope.errorMessage = response;
                     $scope.$apply();
                 });
@@ -23,6 +22,9 @@ GuestBook.controller('messageController', function ($http, constants, vcRecaptch
             'addedfile': function (file) {
                 $scope.errorMessage = 'Ok';
                 $scope.$apply();
+            },
+            'success': function (file){
+                $scope.getMessages();
             }
         },
     };
@@ -34,7 +36,9 @@ GuestBook.controller('messageController', function ($http, constants, vcRecaptch
             .success(function () {
                 $scope.dropzone.processQueue();
                 $uibModalInstance.close();
-                $scope.getMessages();
+                if ($scope.errorMessage == '') {
+                    $scope.getMessages();
+                }
             })
             .error(function (response, status, headers, config) {
                 $scope.err = response.errors;
