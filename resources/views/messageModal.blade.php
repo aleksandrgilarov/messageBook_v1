@@ -44,7 +44,8 @@
                         <button class="btn-primary btn-sm" dropzone="dropzoneConfig">
                             {{trans('messages.modal_pic_btn')}}
                         </button>
-                        <div ng-show="errorMessage">@{{ errorMessage }}</div>
+                        <span class="help-inline" style="color: red" ng-show="errorMessage">{{trans('messages.image_invalid')}}</span>
+                           
                     </div>
                     <div class="col-sm-3">
                         <button ng-click="cancelPic()" class="btn-danger btn-sm">{{trans('messages.modal_pic_cancel')}}</button>
@@ -54,13 +55,13 @@
         </div>
     </div>
         <div class="modal-footer">
-          <!-- <div class="row">
+           <div class="row">
                 <div
                         vc-recaptcha
-                        key="'6LcvT20UAAAAAIeQWBSWzdSydvqw5jbjLmv-aJk6'"
+                        key="'6LdmBG8UAAAAAOAEfE1RkyH_mkb_KBR3UhP_NUDU'"
                         theme="dark"
                 ></div>
-           </div>-->
+           </div>
             <br>
             <div class="row">
                 <button type="button" class="btn btn-lg btn-success" id="btn-save" ng-click="addMessage()" ng-disabled="frmAddMessage.$invalid">{{trans('messages.modal_add_msg_btn')}} </button>

@@ -32,6 +32,7 @@ return [
     //errors
     "field_required" => "Это поле обязательное",
     "invalid_email" => "Это поле должно быть в формате e-mail@domain.example",
+    "image_invalid" => "Вы не можете загружать файлы данного типа",
 
     "footer" => "A.Gilarov, 2018, Гостевая книга"
 ];
